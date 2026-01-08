@@ -116,7 +116,7 @@ export default function AdminPage() {
   const filteredContacts = contacts.filter(contact =>
     contact.name.includes(searchTerm) ||
     contact.phone.includes(searchTerm) ||
-    contact.message.includes(searchTerm)
+    (contact.message?.includes(searchTerm) ?? false)
   );
 
   // 로그인 화면

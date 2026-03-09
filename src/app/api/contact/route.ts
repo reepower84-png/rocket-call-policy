@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
 
 // Discord 웹훅으로 알림 전송
 async function sendDiscordNotification(data: { name: string; phone: string; message: string }) {
@@ -7,7 +6,7 @@ async function sendDiscordNotification(data: { name: string; phone: string; mess
 
   if (!webhookUrl) {
     console.error('Discord webhook URL not configured');
-    return;
+    throw new Error('Discord webhook URL not configured');
   }
 
   const now = new Date();
@@ -53,16 +52,16 @@ async function sendDiscordNotification(data: { name: string; phone: string; mess
     content: `📋 **[정책자금]** 새 문의 접수 - ${koreaTime}`
   };
 
-  try {
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(embed),
-    });
-  } catch (error) {
-    console.error('Failed to send Discord notification:', error);
+  const response = await fetch(webhookUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(embed),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Discord webhook failed: ${response.status}`);
   }
 }
 
@@ -79,31 +78,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Supabase에 데이터 저장
-    const { data, error } = await supabase
-      .from('contacts')
-      .insert([
-        {
-          name,
-          phone,
-          message: message || null,
-        }
-      ])
-      .select();
-
-    if (error) {
-      console.error('Supabase error:', error);
-      return NextResponse.json(
-        { error: '데이터 저장에 실패했습니다.' },
-        { status: 500 }
-      );
-    }
-
-    // Discord 알림 전송
+    // Discord 알림 직접 전송
     await sendDiscordNotification({ name, phone, message });
 
     return NextResponse.json(
-      { success: true, message: '상담 신청이 완료되었습니다.', data },
+      { success: true, message: '상담 신청이 완료되었습니다.' },
       { status: 200 }
     );
   } catch (error) {

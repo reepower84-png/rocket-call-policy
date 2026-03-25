@@ -534,15 +534,27 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <Rocket className="w-6 h-6 text-primary-500" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex items-start gap-2">
+              <Rocket className="w-6 h-6 text-primary-500 mt-0.5" />
               <span className="font-bold text-white">로켓콜-정책자금</span>
             </div>
-            <div className="text-center md:text-right text-sm">
+            <div className="text-sm">
               <p>상호: 제이코리아 | 대표: 이주영</p>
               <p>사업자등록번호: 278-30-01540</p>
               <p className="mt-2">© 2024 로켓콜-정책자금. All rights reserved.</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-3">계열사</h4>
+              <ul className="space-y-1.5 text-sm">
+                <li><a href="https://rk-intro.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜 인트로</a></li>
+                <li><a href="https://rocket-call.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜_보험설계사</a></li>
+                <li><a href="https://rocket-call-auto-dealer.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜_자동차딜러</a></li>
+                <li><a href="https://rocket-call-realestate.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜_부동산분양</a></li>
+                <li><a href="https://rocket-call-hospital.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜_병원</a></li>
+                <li><a href="https://rocket-call-franchise.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜_프랜차이즈 가맹</a></li>
+                <li><a href="https://rk-lawyer.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">로켓콜_변호사</a></li>
+              </ul>
             </div>
           </div>
         </div>

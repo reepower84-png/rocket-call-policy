@@ -510,6 +510,18 @@ export default function Home() {
                   {isSubmitting ? '전송 중...' : '무료 상담 신청하기'}
                 </button>
 
+                <a
+                  href="http://pf.kakao.com/_zxfugn/chat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full btn-primary block text-center"
+                  style={{ backgroundColor: '#FEE500', color: '#191919' }}
+                  onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#F0D800'; }}
+                  onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#FEE500'; }}
+                >
+                  카카오톡으로 상담하기
+                </a>
+
                 {submitStatus === 'success' && (
                   <div className="text-center text-green-600 font-medium">
                     상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다!

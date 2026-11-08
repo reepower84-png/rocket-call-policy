@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { backupFetch } from "../../../lib/inquiry-backup";
 
 // Discord 웹훅으로 알림 전송
 async function sendDiscordNotification(data: { name: string; phone: string; message: string }) {
@@ -52,7 +53,7 @@ async function sendDiscordNotification(data: { name: string; phone: string; mess
     content: `📋 **[정책자금]** 새 문의 접수 - ${koreaTime}`
   };
 
-  const response = await fetch(webhookUrl, {
+  const response = await backupFetch(webhookUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
